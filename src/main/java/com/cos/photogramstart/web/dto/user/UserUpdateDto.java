@@ -11,9 +11,7 @@ public class UserUpdateDto {
     private String name; //필수
     @NotBlank
     private String password; //필수
-
     private String email;
-
     private String website;
     private String bio;
     private String phone;

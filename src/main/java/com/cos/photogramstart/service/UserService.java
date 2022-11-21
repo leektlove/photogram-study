@@ -2,13 +2,13 @@ package com.cos.photogramstart.service;
 
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
+import com.cos.photogramstart.handler.ex.CustomException;
 import com.cos.photogramstart.handler.ex.CustomValidationApiException;
+import com.cos.photogramstart.web.dto.user.UserProfileDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.function.Supplier;
 
 @RequiredArgsConstructor
 @Service
@@ -17,11 +17,29 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
+    @Transactional(readOnly = true)
+    public UserProfileDto 회원프로필(int pageUserId, int principalId){
+
+        UserProfileDto dto = new UserProfileDto();
+
+        //SELECT * FROM image WHERE userId=:userId
+        User userEntity = userRepository.findById(pageUserId).orElseThrow(()->{
+            throw new CustomException("해당 프로필 페이지는 없는 페이지입니다.");
+        });
+        //System.out.println("=================================================");
+
+        dto.setUser(userEntity);
+        dto.setPageOwnerState(pageUserId==principalId);//true은 페이지 주인, false 은 주인이 아님
+        dto.setImageCount(userEntity.getImages().size());
+
+        return dto;
+    }
+
     @Transactional
     public User 회원수정(int id, User user){
         // 1. 영속화
         // 1. 무조건 찾았다. 걱정마 get() 2. 못찾았어 익섹션 발동시킬께 orElseThrow()
-
 
         //글로벌 익셉션을 이용 CustomValidationApiException을 공동으로 사용하겠다.
         User userEntity = userRepository.findById(id).orElseThrow(() -> {
