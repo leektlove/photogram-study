@@ -8,19 +8,29 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Locale;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
+@Table(
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name ="subscribe_uk",
+                        columnNames={"fromUserId", "toUserId"}
+
+                )
+        }
+)
 public class Subscribe {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 번호 증가 전략이 데이터베이스를 따라간다.
     private int id;
 
-    @JoinColumn(name="formUserId")
+    @JoinColumn(name="fromUserId") //이렇게 컬럼명을 만들어
     @ManyToOne
     private User fromUser; //구독하는애
 

@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests()
-                .antMatchers("/", "user/**", "/imge/**", "/subscribe/**", "/comment/**").authenticated()  //인증이 필요한 페이지
+                .antMatchers("/", "user/**", "/imge/**", "/subscribe/**", "/comment/**", "/api/**").authenticated()  //인증이 필요한 페이지
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
