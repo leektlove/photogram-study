@@ -32,7 +32,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/auth/signin") //POST -> 스프링 시큐리티가 로그인 프로세스를 진행한다.
                 .defaultSuccessUrl("/");
 
-
-
     }
 }
