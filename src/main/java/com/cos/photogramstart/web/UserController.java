@@ -35,8 +35,6 @@ public class UserController {
         // <sec:authorize access="isAuthenticated()">
         //	<sec:authentication property="principal" var="principal"/>
         //</sec:authorize>
-
-
         return "user/update";
     }
 

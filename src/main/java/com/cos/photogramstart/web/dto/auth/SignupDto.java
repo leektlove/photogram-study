@@ -18,7 +18,6 @@ public class SignupDto {
     private String email;
     @NotBlank
     private String name;
-
     public User toEntity(){
         return User.builder()
                 .username(username)
