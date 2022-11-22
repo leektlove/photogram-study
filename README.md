@@ -1,3 +1,8 @@
+
+# [Chapter 6] 구독정보 뷰 렌더링  완료 2022-11-22
+# [Chapter 5] 프로필 페이지 완료 2022-11-22
+
+
 # 포토그램 - 인스타그램 클론 코딩
 
 ### STS 툴 버그가 발견되었습니다.
@@ -17,38 +22,38 @@
 - Spring Web
 - oauth2-client
 
-```xml
+xml
 <!-- 시큐리티 태그 라이브러리 -->
-<dependency>
+## <dependency>
 	<groupId>org.springframework.security</groupId>
 	<artifactId>spring-security-taglibs</artifactId>
-</dependency>
+## </dependency>
 
 <!-- JSP 템플릿 엔진 -->
-<dependency>
+## <dependency>
 	<groupId>org.apache.tomcat</groupId>
 	<artifactId>tomcat-jasper</artifactId>
 	<version>9.0.43</version>
-</dependency>
+## </dependency>
 
 <!-- JSTL -->
-<dependency>
+## <dependency>
 	<groupId>javax.servlet</groupId>
 	<artifactId>jstl</artifactId>
-</dependency>
-```
+## </dependency>
+
 
 ### 데이터베이스
 
-```sql
+sql
 create user 'cos'@'%' identified by 'cos1234';
 GRANT ALL PRIVILEGES ON *.* TO 'cos'@'%';
 create database photogram;
-```
+
 
 ### yml 설정
 
-```yml
+yml
 server:
   port: 8080
   servlet:
@@ -89,11 +94,11 @@ spring:
 
 file:
   path: C:/src/springbootwork-sts/upload/
-```
+
 
 ### 태그라이브러리
 
-```jsp
+jsp
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-```
+
