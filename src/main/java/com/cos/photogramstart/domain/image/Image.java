@@ -1,5 +1,6 @@
 package com.cos.photogramstart.domain.image;
 
+import com.cos.photogramstart.domain.like.Likes;
 import com.cos.photogramstart.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Builder
@@ -29,9 +31,21 @@ public class Image {//연관관계 N, 1
     @ManyToOne(fetch = FetchType.EAGER) // 이미지를 select하면 조인해서 User 정보를 같이 들고옴
     private User user;//연관관계 1, 1
 
+
+
     // 이미지 좋아요.
+    @JsonIgnoreProperties({"image"}) //
+    @OneToMany(mappedBy = "image") //나는 연관관계의 주인이 아니에요 폴인키 만들지 마세요. Likes의 image 변수
+    private List<Likes> likes; // 1번 이미지좋아죠, 2번이미지 좋아요.....
 
     // 댓글
+
+
+    @Transient   // DB에 컬럼이 만들어지지 않는다. import javax.persistence.*;
+    private boolean likeState;
+
+    @Transient   // DB에 컬럼이 만들어지지 않는다. import javax.persistence.*;
+    private int likeCount;
 
 
     private LocalDateTime createDate;
