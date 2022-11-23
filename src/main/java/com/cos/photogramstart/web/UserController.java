@@ -23,7 +23,6 @@ public class UserController {
     @GetMapping("/user/{pageUserId}")
     public String profile(@PathVariable int pageUserId, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
-
         UserProfileDto dto = userService.회원프로필(pageUserId, principalDetails.getUser().getId());
         model.addAttribute("dto", dto);
         return "user/profile";

@@ -50,6 +50,7 @@ public class User {
     //     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     // EAGER = User를 select할 때 해당 User id로 등록된 image들을 Join해서 가져와.
 
+    // 먼가가 셀렉트 된후 많이 딸려오면 LAZY 전략 딸려오는게 하나라면 EAGER
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"user"})
     private List<Image> images;//양방향 매핑
@@ -59,5 +60,24 @@ public class User {
     @PrePersist // 디비에 INSERT 되기 직전에 실행
     public void createDate(){
         this.createDate = LocalDateTime.now();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", website='" + website + '\'' +
+                ", bio='" + bio + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", gender='" + gender + '\'' +
+                ", profileImageUrl='" + profileImageUrl + '\'' +
+                ", role='" + role + '\'' +
+
+                ", createDate=" + createDate +
+                '}';
     }
 }

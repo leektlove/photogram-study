@@ -15,7 +15,7 @@ public class AuthService
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional //Write(insert, Update, Delete)
-    public User userSign(User user){
+    public User 회원가입(User user){
         //회원가입 진행
 
         String rawPassword = user.getPassword();
@@ -25,5 +25,7 @@ public class AuthService
         User userEntity = userRepository.save(user);
         return userEntity;
     }
+
+
 
 }

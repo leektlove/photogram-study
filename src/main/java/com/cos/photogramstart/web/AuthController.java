@@ -59,32 +59,16 @@ public class AuthController {
         //bindingResult 기 유효성 검사에러시
         //FieldError 컬렉션에 담는다.
 
-        if(bindingResult.hasErrors()){
-            Map<String, String> errorMap = new HashMap<>();
-            for(FieldError error:bindingResult.getFieldErrors()){
-                errorMap.put(error.getField(), error.getDefaultMessage());
-                System.out.println("=============================");
-                System.out.println(error.getDefaultMessage());
-                System.out.println("=============================");
-            }
+        //User <- SignupDto
+        User user = signupDto.toEntity();
+        authService.회원가입(user);
 
-            //
-            //throw new RuntimeException("유효성검사 실패함");
-            //
-            //Custom
-            throw new CustomValidationException("유효성검사 실패함", errorMap);
+        //User userEntity = authService.회원가입(user);
 
-        }else{
-            //User <- SignupDto
-            User user = signupDto.toEntity();
-            User userEntity = authService.userSign(user);
+        //System.out.println(userEntity);
+        //log.info(user.toString());
 
-            System.out.println(userEntity);
-            log.info(user.toString());
-
-            return "auth/signin";// 파일
-        }
-
+        return "auth/signin";// 파일
 
     }
 

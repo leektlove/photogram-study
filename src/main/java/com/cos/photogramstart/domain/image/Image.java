@@ -1,5 +1,6 @@
 package com.cos.photogramstart.domain.image;
 
+import com.cos.photogramstart.domain.comment.Comment;
 import com.cos.photogramstart.domain.like.Likes;
 import com.cos.photogramstart.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -34,11 +35,15 @@ public class Image {//연관관계 N, 1
 
 
     // 이미지 좋아요.
-    @JsonIgnoreProperties({"image"}) //
-    @OneToMany(mappedBy = "image") //나는 연관관계의 주인이 아니에요 폴인키 만들지 마세요. Likes의 image 변수
+    @JsonIgnoreProperties({"image"}) // 무한 참조 막기
+    @OneToMany(mappedBy = "image") // 나는 연관관계의 주인이 아니에요 폴인키 만들지 마세요. Likes의 image 변수
     private List<Likes> likes; // 1번 이미지좋아죠, 2번이미지 좋아요.....
 
     // 댓글
+    @OrderBy("id DESC")
+    @JsonIgnoreProperties({"image"}) //
+    @OneToMany(mappedBy = "image")  //연관관계의 주인은 FK image를 적어주는 개념이다.
+    private List<Comment> comments;
 
 
     @Transient   // DB에 컬럼이 만들어지지 않는다. import javax.persistence.*;

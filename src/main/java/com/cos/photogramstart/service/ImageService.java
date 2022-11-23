@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.nio.file.Files; // 주의
 import java.nio.file.Path; // 주의
 import java.nio.file.Paths; // 주의
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -21,6 +22,13 @@ import java.util.UUID;
 public class ImageService {
 
     private final ImageRepository imageRepository; //DI를 위해 @RequiredArgsConstructor
+
+    @Transactional(readOnly = true)
+    public List<Image> 인기사진() {
+        return  imageRepository.mPopular();
+
+    }
+
 
     @Transactional(readOnly = true) // 영속성 컨텍스트 변경 감지해서, 더티체킹, flush(반영) 이짓거리들을 하지 않는다!!
     public Page<Image> 이미지스토리(int principalId, Pageable pageable){
@@ -77,5 +85,6 @@ public class ImageService {
 
 
     }
+
 
 }
