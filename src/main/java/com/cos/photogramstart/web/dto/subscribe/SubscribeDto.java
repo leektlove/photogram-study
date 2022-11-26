@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 public class SubscribeDto {
     private int id;
     private String username;
-    private String profileImageUrl;
+    private String profileimageurl;
 
     //Mariadb가  int를 인식못함 Integer로~
-    private Integer subscribeState;
-    private Integer equalUserState;//로그인 사용자와 동일인인지 구분
+    private Integer subscribestate;
+    private Integer equaluserstate;//로그인 사용자와 동일인인지 구분
 
 }
 

@@ -3,6 +3,7 @@ package com.cos.photogramstart.config.auth;
 import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service //IoC
 public class PrincipalDetailsService implements UserDetailsService {
-
     private final UserRepository userRepository;
 
     // 1. 패스워드는 알아서 채킹하니까 신경 쓸 필요 없다.

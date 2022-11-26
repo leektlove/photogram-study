@@ -7,6 +7,7 @@ server:
       enabled: true
     
 spring:
+
   mvc:
     view:
       prefix: /WEB-INF/views/
@@ -17,24 +18,85 @@ spring:
     url: jdbc:mariadb://localhost:3306/photogram?serverTimezone=Asia/Seoul
     username: cos
     password: cos1234
-    
-  jpa:
+
     open-in-view: true
+
+  jpa:
     hibernate:
-      ddl-auto: update #  update 추가 ,create 적용이나 초기화,  none <-production
+      format_sql: true
+      generate-ddl: true
+      ddl-auto: update #  update 추가 ,create 적용이나 초기화,  none <-production  create-drop
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    show-sql: true
-      
+      show-sql: true
+
+
+
+
   servlet:
     multipart:
       enabled: true
-      max-file-size: 2MB
+      max-file-size: 10MB
 
   security:
     user:
       name: test
-      password: 1234   
+      password: 1234
+
+
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: 5552438531537058
+            client-secret: d6f2118ca426fc6bdae839d59eae88f7
+            scope:
+            - public_profile
+            - email
+
 
 file:
-  path: C:/workspace/upload/
+  path: C:/workspace/springbootwork/upload/
+
+
+#
+#  main:
+#    web-application-type: reactive
+
+#  profiles:
+#    include: oauth
+
+
+#    database: MYSQL
+#    generate-ddl: true
+
+#  autoconfigure:
+#    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+#create : JPA가 DB와 상호작용할 때 기존에 있던 스키마(테이블)을 삭제하고 새로 만드는 것을 뜻합니다.
+#create-drop : JPA 종료 시점에 기존에 있었던 테이블을 삭제합니다.
+#update : JPA에 의해 변경된 부분만 반영합니다.
+#validate : 엔티티와 테이블이 정상 매핑되어 있는지만 검증합니다.
+#none : 초기화 동작을 사용하지 않습니다.
+
+#  이번에는 validate옵션을 줘서 엔티티와 해당 매핑하려는 테이블이 제대로 매핑됬는 지 체크하려고 합니다.
+#  spring.jpa.hibernate.ddl-auto=validate
+#  spring.jpa.generate-ddl=false
+#  spring.jpa.show-sql=true
+
+
+#  이제 다음과 같이 update로 설정값을 변경하고 다시 어플리케이션을 실행하게 되면 엔티티 소스코드 상에서 추가되었던 email 변수가 그대로 테이블에 반영되는 것을 볼 수 있습니다.
+#  spring.jpa.hibernate.ddl-auto=update
+#  spring.jpa.generate-ddl=true
+#  spring.jpa.show-sql=true
+
+# sql 보기
+#  spring.jpa.show_sql=true
+#  spring.jpa.properties.hibernate.format_sql=true
+
+  # h2 문법을 mysql로 변경
+#  spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+
+# 테이블 자동생성
+#  spring.jpa.generate-ddl=true
+#  spring.jpa.hibernate.ddl-auto=update

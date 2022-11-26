@@ -17,10 +17,11 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(
+        name = "likes",
         uniqueConstraints = {
                 @UniqueConstraint(
                         name ="likes_uk",
-                        columnNames={"imageId", "userId"}
+                        columnNames={"imageid", "userid"}
 
                 )
         }
@@ -36,22 +37,22 @@ public class Likes { // N
     private int id;
 
     //무한 참조 해결
-    @JoinColumn(name = "imageId")
+    @JoinColumn(name = "imageid")
     @ManyToOne
     private Image image; // 1
 
     //오류가 터지고 나서 잡아봅시다.  @JsonIgnoreProperties({"images"}) <- 무한 참조 해결 like 안에 images 안에가 안나오면 해결된것임
     @JsonIgnoreProperties({"images"})
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userid")
     @ManyToOne
     private User user;  // 1
 
 
-    private LocalDateTime createDate;
+    private LocalDateTime createdate;
 
     @PrePersist //디비에 INSERT 되기 직전에 실행
     public void createDate(){
-        this.createDate = LocalDateTime.now();
+        this.createdate = LocalDateTime.now();
     }
 
 

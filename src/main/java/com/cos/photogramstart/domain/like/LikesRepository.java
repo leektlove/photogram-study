@@ -7,13 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 public interface LikesRepository extends JpaRepository<Likes, Integer> {
 
     @Modifying
-    @Query(value = "INSERT INTO likes(imageId, userId, createDate) VALUES(:imageId,:principalId, now()) ", nativeQuery = true)
-    int mLikes(int imageId, int principalId);
+    @Query(value = "INSERT INTO likes(imageid, userid, createdate) VALUES(:imageid,:principalid, now()) ", nativeQuery = true)
+    int mLikes(int imageid, int principalid);
 
 
     @Modifying
-    @Query(value = "DELETE FROM likes WHERE imageId=:imageId AND userId=:principalId", nativeQuery = true)
-    int mUnLikes(int imageId, int principalId);
+    @Query(value = "DELETE FROM likes WHERE imageid=:imageid AND userid=:principalid", nativeQuery = true)
+    int mUnLikes(int imageid, int principalid);
 
 
 }

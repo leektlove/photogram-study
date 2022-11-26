@@ -38,15 +38,15 @@ public class CommentApiController {
 
         //ValidationAdvice.ValidationAdvice 가 처리
 
-        Comment comment = commentService.댓글쓰기(commentDto.getContent(), commentDto.getImageId(), principalDetails.getUser().getId());// content, imageId, userId
-        return new ResponseEntity<>(new CMRespDto<>(1, "댓글쓰기 성공", comment),HttpStatus.CREATED);
+        Comment comment = commentService.댓글쓰기(commentDto.getContent(), commentDto.getImageid(), principalDetails.getUser().getId());// content, imageId, userId
+        return new ResponseEntity<>(new CMRespDto<>(1, "댓글 쓰기 성공", comment),HttpStatus.CREATED);
     }
 
 
     @DeleteMapping("api/comment/{id}")
     public ResponseEntity<?> commentSave(@PathVariable int id){
         commentService.댓글삭제(id);
-        return new ResponseEntity<>(new CMRespDto<>(1, "댓글삭제 성공", null),HttpStatus.OK);
+        return new ResponseEntity<>(new CMRespDto<>(1, "댓글 삭제 성공", null),HttpStatus.OK);
     }
 
 

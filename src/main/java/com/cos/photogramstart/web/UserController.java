@@ -1,14 +1,10 @@
 package com.cos.photogramstart.web;
 
 import com.cos.photogramstart.config.auth.PrincipalDetails;
-import com.cos.photogramstart.domain.user.User;
 import com.cos.photogramstart.service.UserService;
 import com.cos.photogramstart.web.dto.user.UserProfileDto;
-import com.nimbusds.jose.proc.SecurityContext;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +19,8 @@ public class UserController {
     @GetMapping("/user/{pageUserId}")
     public String profile(@PathVariable int pageUserId, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
 
-        UserProfileDto dto = userService.회원프로필(pageUserId, principalDetails.getUser().getId());
-        model.addAttribute("dto", dto);
+        UserProfileDto userDto = userService.회원프로필(pageUserId, principalDetails.getUser().getId());
+        model.addAttribute("userDto", userDto);
         return "user/profile";
     }
 
@@ -58,13 +54,13 @@ public class UserController {
 //
 //        return "user/update";
 //    }
-//
 
 
 
-//    @GetMapping("/user/profile")
-//    public String profile(){
-//        return "user/profile";
-//    }
+
+    @GetMapping("/user/profile")
+    public String profile(){
+        return "user/profile";
+    }
 
 }

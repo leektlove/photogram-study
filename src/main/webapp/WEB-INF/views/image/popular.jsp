@@ -11,7 +11,7 @@
 
 			<c:forEach var="image" items="${images}">
 				<div class="p-img-box">
-					<a href="/user/${image.user.id}"> <img src="/upload/${image.postImageUrl}" />
+					<a href="/user/${image.user.id}"> <img src="/upload/${image.postimageurl}" />
 					</a>
 				</div>
 			</c:forEach>

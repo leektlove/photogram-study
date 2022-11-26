@@ -49,12 +49,12 @@ public class ValidationAdvice {
 
     @Around("execution(* com.cos.photogramstart.web.*Controller.*(..))")     //특정 함수가 시작전 끝난바로 후
     public Object advice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        //System.out.println("web  컨트롤러 ===================================");
+//        System.out.println("web  컨트롤러 ===================================");
         Object[] args = proceedingJoinPoint.getArgs();
         for(Object arg:args){
             //System.out.println(arg);
             if(arg instanceof BindingResult){
-                //System.out.println("유효성 검사를 하는 함수입니다.");
+//                System.out.println("유효성 검사를 하는 함수입니다.");
 
                 BindingResult bindingResult = (BindingResult) arg; // 다운 캐스팅
 

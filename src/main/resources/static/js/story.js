@@ -20,10 +20,11 @@ function storyLoad() {
 		dataTypes:"json"
 	}).done(res => {
 		 console.log("storyLoad ", res);
-		res.data.content.forEach((image)=>{
+
+		//res.data.content.forEach((image)=>{
+		res.data.images.content.forEach((image)=>{
 			let storyItem = getStoryItem(image);
 			$("#storyList").append(storyItem);
-
 		});
 
 	}).fail(error => {
@@ -42,22 +43,22 @@ function getStoryItem(image) {
 			
 				<div class="sl__item__header">
 					<div>
-						<img class="profile-image" src="/upload/${image.user.profileImageUrl}" onerror="this.src='/images/person.jpeg'"/>
+						<img class="profile-image" src="/upload/${image.user.profileimageurl}" onerror="this.src='/images/person.jpeg'"/>
 					</div>
 					<div>${image.user.username}</div>
 				</div>
 
 				<div class="sl__item__img">
-					<img src="/upload/${image.postImageUrl}"/>
+					<img src="/upload/${image.postimageurl}"/>
 				</div>
 
 				<div class="sl__item__contents">
 					<div class="sl__item__contents__icon">
 						<button>`;
 
-	// console.log("getStoryItem image.likeState", image.likeState);
+	// console.log("getStoryItem image.likestate", image.likestate);
 
-						if(image.likeState){
+						if(image.likestate){
 							item +=`<i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
 						}else{
 							item +=`<i class="far fa-heart" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
@@ -68,7 +69,7 @@ function getStoryItem(image) {
 					</div>
 
 					<span class="like">
-					<b id="storyLikeCount-${image.id}">${image.likeCount}</b>likes</span>
+					<b id="storyLikeCount-${image.id}">${image.likecount}</b>likes</span>
 
 					<div class="sl__item__contents__content">
 						<p>${image.caption}</p>
@@ -202,7 +203,7 @@ function addComment(imageId) {
 	let commentList = $(`#storyCommentList-${imageId}`);
 
 	let data = {
-		imageId: imageId,
+		imageid: imageId,
 		content: commentInput.val()
 	}
 
@@ -244,7 +245,7 @@ function addComment(imageId) {
 	}).fail(error=>{
 		//console.log("오류", error);
 		//console.log("오류", error.responseJSON);
-		alert(error.responseJSON.data.Content);
+		alert(error.responseJSON.data.content);
 	});
 
 	commentInput.val(""); //인풋 필드 비우기
@@ -287,14 +288,14 @@ function deleteComment(commentId) {
 
 // 	<div class="sl__item__header">
 // 		<div>
-// 			<img class="profile-image" src="/upload/${image.user.profileImageUrl}"
+// 			<img class="profile-image" src="/upload/${image.user.profileimageurl}"
 // 				 onerror="this.src='/images/person.jpeg'" />
 // 		</div>
 // 		<div>${image.user.username}</div>
 // 	</div>
 
 // 	<div class="sl__item__img">
-// 		<img src="/upload/${image.postImageUrl}" />
+// 		<img src="/upload/${image.postimageurl}" />
 // 	</div>
 
 // 	<div class="sl__item__contents">

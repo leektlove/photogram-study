@@ -20,16 +20,16 @@ public class SubcribeService {
     private final EntityManager em;// Repository는 Entity
 
     @Transactional
-    public List<SubscribeDto> 구독리스트(int principalId, int pageUserId){
+    public List<SubscribeDto> 구독리스트(int principalid, int pageuserid){
 
         //쿼리 준비
         StringBuffer sb= new StringBuffer();
-        sb.append("SELECT u.id, u.username, u.profileImageUrl, "); //마지막 한칸 다 뛰어야함
-        sb.append("if((SELECT 1 FROM subscribe WHERE fromUserId = ? AND toUserId = u.id), 1, 0) subscribeState, ");
-        sb.append("if((?=u.id), 1, 0) equalUserState ");
+        sb.append("SELECT u.id, u.username, u.profileimageurl, "); //마지막 한칸 다 뛰어야함
+        sb.append("if((SELECT 1 FROM subscribe WHERE fromuserid = ? AND touserid = u.id), 1, 0) subscribestate, ");
+        sb.append("if((?=u.id), 1, 0) equaluserstate ");
         sb.append("FROM user u INNER JOIN subscribe s ");
-        sb.append("ON u.id = s.toUserId ");
-        sb.append("WHERE s.fromUserId = ?"); // 세미콜론 첨부하면 안됨
+        sb.append("ON u.id = s.touserid ");
+        sb.append("WHERE s.fromuserid = ?"); // 세미콜론 첨부하면 안됨
 
         // 1. 물음표(?) principalId
         // 2. 물음표(?) principalId
@@ -37,13 +37,14 @@ public class SubcribeService {
 
         //쿼리 완성
         Query query = em.createNativeQuery(sb.toString())
-                .setParameter(1, principalId)
-                .setParameter(2, principalId)
-                .setParameter(3, pageUserId);
+                .setParameter(1, principalid)
+                .setParameter(2, principalid)
+                .setParameter(3, pageuserid);
 
         //쿼리 실행 (qlrm 라이브러리) Dto에 DB결과를 매핑하기 위해서
         JpaResultMapper result = new JpaResultMapper();
         List<SubscribeDto> subscribeDtos = result.list(query, SubscribeDto.class);
+
 
         return subscribeDtos;
     }

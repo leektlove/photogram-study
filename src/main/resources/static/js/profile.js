@@ -57,7 +57,8 @@ function subscribeInfoModalOpen(pageUserId) {
 	}).done(res => {
 		console.log("구독정보 불러오기 성공 ", res.data);
 
-		res.data.forEach((u)=>{
+		//res.data.list.forEach((u)=>{
+		res.data.list.forEach((u)=>{
 			let item = getSubscribeModalItem(u);
 			$("#subscribeModalList").append(item);
 		});
@@ -73,15 +74,15 @@ function getSubscribeModalItem(u) {
 
 	let item =`<div class="subscribe__item" id="subscribeModalItem-${u.id}">
 	<div class="subscribe__img">
-		<img src="/upload/${u.profileImageUrl}" onerror="this.src='/images/person.jpeg'"/>
+		<img src="/upload/${u.profileimageurl}" onerror="this.src='/images/person.jpeg'"/>
 	</div>
 	<div class="subscribe__text">
 		<h2>${u.username}</h2>
 	</div>
 	<div class="subscribe__btn">`;
 
-		if(!u.equalUserState){ // 동일유저가 아닐 때 버튼이 만들어 져야함
-			if(u.subscribeState){ //구독한 상태
+		if(!u.equaluserstate){ // 동일유저가 아닐 때 버튼이 만들어 져야함
+			if(u.subscribestate){ //구독한 상태
 				item +=`<button className="cta blue" onClick="toggleSubscribe(${u.id}, this)">구독취소</button>`;
 			}else{//구독안한 상태
 				item +=`<button className="cta" onClick="toggleSubscribe(${u.id}, this)">구독하기</button>`;
@@ -130,7 +131,7 @@ function profileImageUpload( pageUserId, principalId) {
 		let formData = new FormData(profileImageForm);
 		$.ajax({
 			type:"put",
-			url:`/api/user/${principalId}/profileImageUrl`,
+			url:`/api/user/${principalId}/profileimageurl`,
 			data:formData,
 			contentType: false, //필수 : x-www-form-urlencoded로 파싱되는 것을 방지
 			processData:false, //필수 : contentType을 false로 줬을 때 QueryString 자동 설정됨 해제

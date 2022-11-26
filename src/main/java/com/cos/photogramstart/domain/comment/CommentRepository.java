@@ -8,7 +8,7 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
     //작동 안됨 Modifying은 int/Integer void 만 리턴 가능
 //    @Modifying
-//    @Query(value="INSERT INTO comment(content, imageId, userId, createDate) VALUES(:content, :imageId, :userId, now())", nativeQuery = true)
+//    @Query(value="INSERT INTO comment(content, imageId, userId, createDate) VALUES(:content, :imageid, :userid, now())", nativeQuery = true)
 //    Comment mSave(String content, int imageId, int userId);
 
     //해결

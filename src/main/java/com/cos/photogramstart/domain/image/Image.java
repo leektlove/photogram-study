@@ -19,16 +19,17 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
+@Table(name = "image")
 public class Image {//연관관계 N, 1
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 번호 증가 전략이 데이터베이스를 따라간다.
     private int id;
     private String caption; // 오늘 나 너무 피곤해!!
-    private String postImageUrl;// 사진을 전송받아서 그 사진을 섭어에 특정 폴더에 저장 - DB에 그 저장된 경로를 insert
+    private String postimageurl;// 사진을 전송받아서 그 사진을 섭어에 특정 폴더에 저장 - DB에 그 저장된 경로를 insert
 
     @JsonIgnoreProperties({"images"}) // user 정보의 images 까지 필요없다.
-    @JoinColumn(name="userId")
+    @JoinColumn(name="userid")
     @ManyToOne(fetch = FetchType.EAGER) // 이미지를 select하면 조인해서 User 정보를 같이 들고옴
     private User user;//연관관계 1, 1
 
@@ -47,20 +48,35 @@ public class Image {//연관관계 N, 1
 
 
     @Transient   // DB에 컬럼이 만들어지지 않는다. import javax.persistence.*;
-    private boolean likeState;
+    private boolean likestate;
 
     @Transient   // DB에 컬럼이 만들어지지 않는다. import javax.persistence.*;
-    private int likeCount;
+    private int likecount;
 
 
-    private LocalDateTime createDate;
+    private LocalDateTime createdate;
 
     @PrePersist //디비에 INSERT 되기 직전에 실행
     public void createDate(){
-        this.createDate = LocalDateTime.now();
+        this.createdate = LocalDateTime.now();
     }
 
-//오브젝트를 콘솔에 출력할 때 문제가 될 수 있어서 User 부분을 출력되지 않게 함.
+    @Override
+    public String toString() {
+        return "Image{" +
+                "id=" + id +
+                ", caption='" + caption + '\'' +
+                ", postimageurl='" + postimageurl + '\'' +
+                ", user=" + user +
+                ", likes=" + likes +
+                ", comments=" + comments +
+                ", likestate=" + likestate +
+                ", likecount=" + likecount +
+                ", createdate=" + createdate +
+                '}';
+    }
+
+    //오브젝트를 콘솔에 출력할 때 문제가 될 수 있어서 User 부분을 출력되지 않게 함.
 //    @Override
 //    public String toString() {
 //        return "Image{" +
@@ -68,7 +84,7 @@ public class Image {//연관관계 N, 1
 //                ", caption='" + caption + '\'' +
 //                ", postImageUrl='" + postImageUrl + '\'' +
 //                //", user=" + user + 삭제!!!
-//                ", createDate=" + createDate +
+//                ", createdate=" + createdate +
 //                '}';
 //    }
 }

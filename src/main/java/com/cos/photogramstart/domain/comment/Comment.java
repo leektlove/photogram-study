@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Entity
+@Table(name = "comment")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 번호 증가 전략이 데이터베이스를 따라간다.
@@ -26,20 +27,20 @@ public class Comment {
 
     // 먼가가 셀렉트 된후 많이 딸려오면 LAZY 전략    딸려오는게 하나라면 EAGER
     @JsonIgnoreProperties({"images"})
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userid")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-    @JoinColumn(name = "imageId")
+    @JoinColumn(name = "imageid")
     @ManyToOne(fetch = FetchType.EAGER)
     private Image image;
 
 
-    private LocalDateTime createDate;
+    private LocalDateTime createdate;
 
     @PrePersist //디비에 INSERT 되기 직전에 실행
     public void createDate(){
-        this.createDate = LocalDateTime.now();
+        this.createdate = LocalDateTime.now();
     }
 
 }

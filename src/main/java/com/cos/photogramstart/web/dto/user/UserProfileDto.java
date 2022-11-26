@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 public class UserProfileDto {
 
-    private boolean pageOwnerState; //isPageOwner JSTL에서 앞에 is 붙으면 제대로 파싱이 안된다. pageOwnerState로 변경
-    private int imageCount;
-    private boolean subscribeState;
-    private int subscribeCount;
+    private boolean pageownerstate; //isPageOwner JSTL에서 앞에 is 붙으면 제대로 파싱이 안된다. pageOwnerState로 변경
+    private int imagecount;
+    private boolean subscribestate;
+    private int subscribecount;
     private User user;
 
 }
